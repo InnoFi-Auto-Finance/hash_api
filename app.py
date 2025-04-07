@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import hashlib
+import traceback
 from typing import Union, List
 
 pepper = 'innofi-jay-anderson'
@@ -24,7 +25,14 @@ def hash_message(data: HashRequest):
         return response_dict
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        traceback.print_exc()  # Prints full stack trace to console/logs
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": str(e),
+                "type": type(e).__name__
+            }
+        )
 
 
 @app.get("/")
