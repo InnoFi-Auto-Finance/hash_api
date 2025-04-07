@@ -1,14 +1,15 @@
 docker_notes.txt
 
+echo $AWSACCOUNTID
 
 aws ecr get-login-password --region us-east-1 \
 | docker login --username AWS \
-  --password-stdin 692859937553.dkr.ecr.us-east-1.amazonaws.com
+  --password-stdin $AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com
 
 
 docker build -t hash-api .
-docker tag hash-api:latest 692859937553.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest
-docker push 692859937553.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest
+docker tag hash-api:latest $AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest
+docker push $AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest
 
 
 
