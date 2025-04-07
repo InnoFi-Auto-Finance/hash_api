@@ -18,4 +18,19 @@ curl -X POST https://6u3gbgmdub.us-east-1.awsapprunner.com/sha256 \
   -d '{"message": "hello world"}'
 
 
+
+
+curl -X POST http://localhost:8000/ \
+  -H "Content-Type: application/json" \
+  -d '{"message": "hello world"}'
+
+
   -d '{"message": ["hello", "world"] }'
+
+
+## check deploy status after running docker push
+ aws apprunner list-services --query "ServiceSummaryList[*].[ServiceName,ServiceArn]" --output table
+
+arn=$(aws apprunner list-services --query "ServiceSummaryList[*].[ServiceName,ServiceArn]" --output table | grep -F 'hash-api' | cut -d'|' -f3 | sed 's/  //g')
+arn=$(echo "$arn" | xargs)
+aws apprunner describe-service --service-arn "${arn}" | jq '.Service.Status'
