@@ -1,0 +1,13 @@
+{
+  "ImageRepository": {
+    "ImageIdentifier": "692859937553.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest",
+    "ImageRepositoryType": "ECR",
+    "ImageConfiguration": {
+      "Port": "8080",
+      "RuntimeEnvironmentVariables": {
+        "PEPPER": "innofi-jay-anderson"
+      }
+    }
+  },
+  "AutoDeploymentsEnabled": true
+}
