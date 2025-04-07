@@ -29,7 +29,7 @@ def hash_message(data: HashRequest):
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to the SHA256 API ✨ Use POST /sha256"}
+    return {"message": "v1.1 ;  Welcome to the SHA256 API ✨ Use POST /sha256"}
 
 # salted_message = data.message + pepper
 # return {"sha256": hashlib.sha256(salted_message.encode()).hexdigest()}
