@@ -45,5 +45,5 @@ def hash_message(data: HashRequest):
 
 @app.get("/")
 def root():
-    return {"message": "v1.1.04 ;  Welcome to the SHA256 API ✨ Use POST /sha256"}
+    return {"message": "v1.1.05 ;  Welcome to the SHA256 API ✨ Use POST /sha256"}
 

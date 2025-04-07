@@ -1,4 +1,4 @@
-docker_notes.txt
+# ./deploy.sh
 
 echo $AWSACCOUNTID
 
@@ -34,3 +34,13 @@ curl -X POST http://localhost:8000/ \
 arn=$(aws apprunner list-services --query "ServiceSummaryList[*].[ServiceName,ServiceArn]" --output table | grep -F 'hash-api' | cut -d'|' -f3 | sed 's/  //g')
 arn=$(echo "$arn" | xargs)
 aws apprunner describe-service --service-arn "${arn}" | jq '.Service.Status'
+
+
+
+
+
+PEPPER=$(aws ssm get-parameter \
+  --name "/ssn_pepper_production" \
+  --region us-east-1 \
+  --query "Parameter.Value" \
+  --output text)
