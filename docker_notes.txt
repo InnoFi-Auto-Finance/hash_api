@@ -1,0 +1,21 @@
+docker_notes.txt
+
+echo $AWSACCOUNTID
+
+aws ecr get-login-password --region us-east-1 \
+| docker login --username AWS \
+  --password-stdin $AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com
+
+
+docker build -t hash-api .
+docker tag hash-api:latest $AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest
+docker push $AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest
+
+
+
+curl -X POST https://6u3gbgmdub.us-east-1.awsapprunner.com/sha256 \
+  -H "Content-Type: application/json" \
+  -d '{"message": "hello world"}'
+
+
+  -d '{"message": ["hello", "world"] }'
