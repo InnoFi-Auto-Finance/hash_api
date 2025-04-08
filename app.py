@@ -6,9 +6,12 @@ import os
 from typing import Union, List
 
 PEPPER = os.environ.get("PEPPER")
+VERSION = os.environ.get("VERSION","?")
 
 if not PEPPER:
     raise RuntimeError("Missing required environment variable: PEPPER")
+
+root_text=f"v{VERSION} ;  Welcome to the SHA256 API ✨ Use POST /sha256"
 
 app = FastAPI()
 
@@ -45,5 +48,6 @@ def hash_message(data: HashRequest):
 
 @app.get("/")
 def root():
-    return {"message": "v1.1.05 ;  Welcome to the SHA256 API ✨ Use POST /sha256"}
+    return {"message": root_text}
+
 

@@ -5,7 +5,8 @@
     "ImageConfiguration": {
       "Port": "8080",
       "RuntimeEnvironmentVariables": {
-        "PEPPER": "/ssn_pepper_production"
+        "PEPPER": "/ssn_pepper_production",
+        "VERSION": "1.1.06"
       }
     }
   },

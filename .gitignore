@@ -10,4 +10,9 @@ prod*
 **/*data*.json
 **/staging_causal_rules/*
 .idea/*
+_junk/*
+_scratch/*
 source-config.json
+# Ignore Python cache files
+__pycache__/
+*.py[cod]

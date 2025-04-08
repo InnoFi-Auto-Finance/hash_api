@@ -1,5 +1,7 @@
 import json
 import boto3
+from botocore.exceptions import ClientError
+
 
 def get_ssm_parameter(param_name: str) -> str:
     """Fetches a parameter value from AWS Systems Manager Parameter Store."""
@@ -17,7 +19,12 @@ def resolve_env_vars(config: dict) -> dict:
 
     for key, param_path in env_vars.items():
         print(f"Fetching parameter: {param_path}")
-        resolved_value = get_ssm_parameter(param_path)
+        try:
+            resolved_value = get_ssm_parameter(param_path)
+        except:
+            message=f'Failed to get parameter: {param_path}'
+            print(message)
+            resolved_value = param_path
         resolved_env[key] = resolved_value
 
     config["ImageRepository"]["ImageConfiguration"]["RuntimeEnvironmentVariables"] = resolved_env

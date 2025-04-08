@@ -7,6 +7,10 @@ IMAGE_URI="$AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest"
 
 echo "ensure you are logged into docker"
 
+echo "populate env vars in config file"
+python3 fill_config.py
+
+
 echo "🔨 Building image..."
 docker build -t hash-api .
 
@@ -58,3 +62,6 @@ while true; do
   sleep $check_interval
   elapsed=$((elapsed + check_interval))
 done
+
+echo "clean up sensitive data on local"
+find . -type f   -maxdepth 1 -name 'source-config.json' -delete
