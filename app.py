@@ -2,14 +2,22 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import hashlib
 import traceback
+import os
 from typing import Union, List
 
-pepper = 'innofi-jay-anderson'
+PEPPER = os.environ.get("PEPPER")
+VERSION = os.environ.get("VERSION","?")
+
+if not PEPPER:
+    raise RuntimeError("Missing required environment variable: PEPPER")
+
+root_text=f"v{VERSION} ;  Welcome to the SHA256 API ✨ Use POST /sha256"
 
 app = FastAPI()
 
 class HashRequest(BaseModel):
     message: Union[str, List[str]]
+    use_pepper: bool = True
 
 @app.post("/sha256")
 def hash_message(data: HashRequest):
@@ -19,7 +27,8 @@ def hash_message(data: HashRequest):
         input_list = data.message if isinstance(data.message, list) else [data.message]
         response_dict = {'__input_type__':str(input_type)}
         for x in input_list:
-            salted_message = str(x) + pepper
+            pepper_for_hashing = PEPPER if data.use_pepper else ''
+            salted_message = str(x) + pepper_for_hashing
             response_dict[x] = hashlib.sha256(salted_message.encode()).hexdigest()
 
         return response_dict
@@ -34,10 +43,11 @@ def hash_message(data: HashRequest):
             }
         )
 
+# todo add a boolean flag that tells us whether to use the pepper
+# default true
 
 @app.get("/")
 def root():
-    return {"message": "v1.1.01 ;  Welcome to the SHA256 API ✨ Use POST /sha256"}
+    return {"message": root_text}
 
-# salted_message = data.message + pepper
-# return {"sha256": hashlib.sha256(salted_message.encode()).hexdigest()}
+

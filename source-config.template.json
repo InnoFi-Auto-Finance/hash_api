@@ -1,0 +1,14 @@
+{
+  "ImageRepository": {
+    "ImageIdentifier": "692859937553.dkr.ecr.us-east-1.amazonaws.com/hash-api:latest",
+    "ImageRepositoryType": "ECR",
+    "ImageConfiguration": {
+      "Port": "8080",
+      "RuntimeEnvironmentVariables": {
+        "PEPPER": "/ssn_pepper_production",
+        "VERSION": "1.1.06"
+      }
+    }
+  },
+  "AutoDeploymentsEnabled": true
+}

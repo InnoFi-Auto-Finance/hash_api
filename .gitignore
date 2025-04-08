@@ -1,0 +1,18 @@
+# Set what I want excluded from the git repository
+
+node_modules
+prod*
+*prod*json
+**/.DS_Store
+**/data/**/*.json
+**/~$*
+**/*copy.json
+**/*data*.json
+**/staging_causal_rules/*
+.idea/*
+_junk/*
+_scratch/*
+source-config.json
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
