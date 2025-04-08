@@ -5,7 +5,7 @@
     "ImageConfiguration": {
       "Port": "8080",
       "RuntimeEnvironmentVariables": {
-        "PEPPER": "innofi-jay-anderson"
+        "PEPPER": "/ssn_pepper_production"
       }
     }
   },

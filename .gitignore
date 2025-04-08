@@ -1,0 +1,13 @@
+# Set what I want excluded from the git repository
+
+node_modules
+prod*
+*prod*json
+**/.DS_Store
+**/data/**/*.json
+**/~$*
+**/*copy.json
+**/*data*.json
+**/staging_causal_rules/*
+.idea/*
+source-config.json
